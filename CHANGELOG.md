@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.1] — 2026-08-11
 
+Released as tag `v0.1.1`.
+
 No functional change. Nothing in `src/` or `bin/` was touched, so behaviour is
 identical to 0.1.0.
 
