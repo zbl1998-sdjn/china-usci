@@ -1,10 +1,11 @@
 {
-  "name": "usci",
+  "name": "china-usci",
   "version": "0.1.0",
   "description": "Parse and verify the 18-character Unified Social Credit Identifier on a Chinese business licence (GB 32100-2015). Offline, zero dependencies, and explicit about what a passing code does not prove.",
   "keywords": [
     "china",
     "usci",
+    "uscc",
     "unified-social-credit-code",
     "unified-social-credit-identifier",
     "gb32100",
@@ -48,11 +49,11 @@
   "author": "Derrick (Currawong Web)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zbl1998-sdjn/usci.git"
+    "url": "git+https://github.com/zbl1998-sdjn/china-usci.git"
   },
   "bugs": {
-    "url": "https://github.com/zbl1998-sdjn/usci/issues"
+    "url": "https://github.com/zbl1998-sdjn/china-usci/issues"
   },
-  "homepage": "https://github.com/zbl1998-sdjn/usci#readme",
+  "homepage": "https://github.com/zbl1998-sdjn/china-usci#readme",
   "sideEffects": false
 }

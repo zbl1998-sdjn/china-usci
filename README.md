@@ -1,15 +1,15 @@
-# usci
+# china-usci
 
 Parse and verify the 18-character **Unified Social Credit Identifier** (统一社会信用代码) printed on every mainland Chinese business licence.
 
 Offline. Zero dependencies. And explicit about what a passing code *does not* prove.
 
 ```bash
-npm install usci
+npm install china-usci
 ```
 
 ```js
-import { parseUsci } from 'usci';
+import { parseUsci } from 'china-usci';
 
 const result = parseUsci('91110302 60002492 XA');   // spacing and case are tolerated
 
@@ -22,7 +22,7 @@ result.doesNotProve;   // five things it does not establish — do not drop thes
 Or without writing any code:
 
 ```console
-$ npx usci 9111030260002492XA
+$ npx china-usci 9111030260002492XA
 ✓ 9111030260002492XA  transcribed correctly
   1-1    9          Registration authority code — Market regulation (工商)
   2-2    1          Entity category code — Enterprise (企业)
@@ -93,7 +93,7 @@ import {
   parseUsci, isWellFormed, normalise, checkCharacterFor,
   authorityFor, categoryFor, provinceFor,
   USCI_CHARSET, USCI_WEIGHTS, USCI_DOES_NOT_PROVE
-} from 'usci';
+} from 'china-usci';
 ```
 
 ### `parseUsci(input) → result`
@@ -121,6 +121,8 @@ Convenience predicate. Prefer `parseUsci` — this drops the reasons, and the re
 TypeScript definitions ship with the package.
 
 ## CLI
+
+After `npm install -g china-usci` the command is `usci`; without installing, use `npx china-usci`.
 
 ```console
 usci <code>              parse one code
