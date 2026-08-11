@@ -1,0 +1,55 @@
+name: Publish to npm
+
+# Trusted publishing (OIDC). There is no token anywhere in this file, and none in
+# repository secrets — npm verifies that the request came from this repository,
+# this workflow file, running on GitHub's infrastructure. That is the whole point:
+# a credential that cannot be stolen because it does not exist between runs.
+#
+# Release flow:
+#   1. bump "version" in package.json and add a CHANGELOG entry
+#   2. commit, then: git tag v0.1.1 && git push origin v0.1.1
+#   3. this workflow publishes and npm attaches a provenance attestation
+#
+# The npmjs.com side must name this exact file (publish.yml) as the trusted
+# publisher for the package, or the publish step will be rejected.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  # Manual runs are allowed so the wiring can be proven before a real release.
+  # Re-publishing an existing version is rejected by the registry, so this is safe.
+  workflow_dispatch:
+
+permissions:
+  id-token: write # required for OIDC; without it npm cannot verify the caller
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Node 24 ships npm 11.17+, which clears the >=11.5.1 floor that
+          # trusted publishing requires. Pinning the major rather than 'latest'
+          # keeps a release build reproducible.
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Record toolchain versions
+        # Printed as evidence: trusted publishing needs npm >= 11.5.1 and Node >= 22.14.
+        run: |
+          node --version
+          npm --version
+
+      # No install step: this package has zero dependencies and therefore no
+      # lockfile, so `npm ci` — which requires one — would fail here.
+      - run: npm run lint
+      - run: npm test
+
+      # No NODE_AUTH_TOKEN, no NPM_TOKEN. Authentication is the OIDC exchange.
+      # Provenance is attached automatically on trusted publishes.
+      - run: npm publish
