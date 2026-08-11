@@ -4,6 +4,30 @@ All notable changes to this package are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] — 2026-08-11
+
+No functional change. Nothing in `src/` or `bin/` was touched, so behaviour is
+identical to 0.1.0.
+
+### Changed
+
+- `bin` path normalised from `./bin/cli.js` to `bin/cli.js`. npm rewrote this
+  during publish anyway and warned `"bin[usci]" script name … was invalid and
+  removed` — alarming wording for what was only normalisation. The published
+  0.1.0 did carry a working `bin`; aligning the source removes the warning.
+- README now carries version, CI, zero-dependency and licence badges. These were
+  added after 0.1.0 shipped, and npm renders the README captured at publish time,
+  so this release is the first where they appear on the package page.
+
+### Infrastructure
+
+- Published through **npm trusted publishing (OIDC)** from GitHub Actions. No
+  token exists in this repository, in its secrets, or on any maintainer machine.
+  This release is also the end-to-end proof of that path: 0.1.0 went out with a
+  token, 0.1.1 does not.
+- Added `RELEASING.md` and `.github/workflows/publish.yml` (neither ships in the
+  package tarball).
+
 ## [0.1.0] — 2026-08-11
 
 First release.
