@@ -1,5 +1,7 @@
 # china-usci
 
+[![npm](https://img.shields.io/npm/v/china-usci)](https://www.npmjs.com/package/china-usci)[![CI](https://github.com/zbl1998-sdjn/china-usci/actions/workflows/ci.yml/badge.svg)](https://github.com/zbl1998-sdjn/china-usci/actions/workflows/ci.yml)[![zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://www.npmjs.com/package/china-usci?activeTab=dependencies)[![license](https://img.shields.io/npm/l/china-usci)](LICENSE)
+
 Parse and verify the 18-character **Unified Social Credit Identifier** (统一社会信用代码) printed on every mainland Chinese business licence.
 
 Offline. Zero dependencies. And explicit about what a passing code *does not* prove.
