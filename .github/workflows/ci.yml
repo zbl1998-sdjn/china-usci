@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The floor stated in package.json engines, plus the two live LTS lines.
+        node: ['18', '20', '22', '24']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      # No install step on purpose: this package has zero dependencies, and a
+      # green CI without a lockfile is part of what that claim means.
+      - run: npm run lint
+      - run: npm test
+      - name: CLI smoke test
+        run: |
+          node bin/cli.js 9111030260002492XA
+          node bin/cli.js --json 9111030260002492XA
+          if node bin/cli.js 9111030260002492XB; then
+            echo "expected a non-zero exit for a bad check character" && exit 1
+          fi

@@ -1,0 +1,54 @@
+{
+  "name": "usci",
+  "version": "0.1.0",
+  "description": "Parse and verify the 18-character Unified Social Credit Identifier on a Chinese business licence (GB 32100-2015). Offline, zero dependencies, and explicit about what a passing code does not prove.",
+  "keywords": [
+    "china",
+    "usci",
+    "unified-social-credit-code",
+    "unified-social-credit-identifier",
+    "gb32100",
+    "business-licence",
+    "company-registration",
+    "check-digit",
+    "supplier-verification",
+    "due-diligence",
+    "osint",
+    "统一社会信用代码"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./tables": "./src/tables.js",
+    "./package.json": "./package.json"
+  },
+  "types": "./src/index.d.ts",
+  "bin": {
+    "usci": "./bin/cli.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "lint": "node --check src/index.js && node --check src/parse.js && node --check src/tables.js && node --check src/lookup.js && node --check bin/cli.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "author": "Derrick (Currawong Web)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbl1998-sdjn/usci.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zbl1998-sdjn/usci/issues"
+  },
+  "homepage": "https://github.com/zbl1998-sdjn/usci#readme",
+  "sideEffects": false
+}
