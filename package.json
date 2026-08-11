@@ -25,7 +25,7 @@
   },
   "types": "./src/index.d.ts",
   "bin": {
-    "usci": "./bin/cli.js"
+    "usci": "bin/cli.js"
   },
   "files": [
     "src",
