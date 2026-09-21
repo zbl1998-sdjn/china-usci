@@ -52,6 +52,27 @@ This is why every result carries `doesNotProve`, and why the library never uses 
 
 To find out whether a company actually exists and is still trading, you have to read the registry — a separate step this package deliberately does not pretend to do.
 
+## How much protection the check character actually gives
+
+Not a claim, a measurement. We generated single-character transcription errors
+and counted how many the check character catches:
+
+| Identifier | Errors generated | Caught |
+|---|---|---|
+| **USCI** (this package) | 1,080,000 | **100%** |
+| VIN (vehicle identification number) | 1,088,000 | 92.52% |
+
+Measured 9 August 2026, fixed seed 20260809, reproducible.
+Catching every single-character slip is a real guarantee, and it is also the
+*only* guarantee: it says nothing about whether the company behind the code exists.
+A passing code still has to match the document you were sent.
+
+Method, raw data and the generator script are published under CC BY:
+[DOI 10.5281/zenodo.21867383](https://doi.org/10.5281/zenodo.21867383).
+
+Related open datasets on Chinese company records, each dated and citable:
+[currawongweb.com/research](https://currawongweb.com/research/).
+
 ## What it decodes
 
 GB 32100-2015 fixes both the length and the layout:

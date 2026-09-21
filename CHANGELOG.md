@@ -4,6 +4,26 @@ All notable changes to this package are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] — 2026-09-22
+
+Released as tag `v0.2.0`.
+
+No functional change. Nothing in `src/` or `bin/` was touched, so behaviour is
+identical to 0.1.1. This release exists to carry the measurement that answers
+the question the package gets asked most: how much does the check character
+actually protect you?
+
+### Added
+
+- README section reporting the measured protection: of 1,080,000 generated
+  single-character transcription errors, the USCI check character caught 100%;
+  the same test against VIN caught 92.52% of 1,088,000. Measured 9 August 2026
+  with fixed seed 20260809. Method, raw data and generator are published under
+  CC BY at [DOI 10.5281/zenodo.21867383](https://doi.org/10.5281/zenodo.21867383).
+  The section states plainly that this is the only guarantee the check character
+  gives, which is the same boundary `doesNotProve` carries in the API.
+- Pointer to the related open datasets on Chinese company records.
+
 ## [0.1.1] — 2026-08-11
 
 Released as tag `v0.1.1`.

@@ -1,6 +1,6 @@
 {
   "name": "china-usci",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Parse and verify the 18-character Unified Social Credit Identifier on a Chinese business licence (GB 32100-2015). Offline, zero dependencies, and explicit about what a passing code does not prove.",
   "keywords": [
     "china",
