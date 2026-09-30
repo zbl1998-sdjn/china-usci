@@ -25,7 +25,7 @@ Or without writing any code:
 
 ```console
 $ npx china-usci 9111030260002492XA
-✓ 9111030260002492XA  transcribed correctly
+✓ 9111030260002492XA  check character consistent
   1-1    9          Registration authority code — Market regulation (工商)
   2-2    1          Entity category code — Enterprise (企业)
   3-8    110302     Administrative division code — Registered in Beijing.
@@ -44,7 +44,7 @@ $ npx china-usci 9111030260002492XA
 
 ## The one thing to understand before using this
 
-**A passing code means the code was transcribed correctly. That is all it means.**
+**A passing code means the check character agrees with the first 17 characters. That is all it means.** It does not confirm the code was copied correctly, and it says nothing about the company.
 
 It does not mean the company exists. A well-formed code can be invented in a minute — the check character is arithmetic, not a registry lookup. Nothing here touches any database.
 
@@ -97,7 +97,7 @@ A prefix belonging to Taiwan (71), Hong Kong (81) or Macau (82) is flagged as `m
 
 The algorithm is **GB 32100-2015**《法人和其他组织统一社会信用代码编码规则》, in force since 2015-10-01.
 
-The weight factors and character set were transcribed from the standard's full text **on Wikisource, not from an official PDF**. That is a real transcription risk, so it was checked two independent ways:
+The weight factors and character set were transcribed from the standard's full text **on Wikisource, not from an official PDF**. That is a real transcription risk, so it was checked three independent ways:
 
 **1. Arithmetic.** Every weight is recomputed as `Wi = 3^(i-1) mod 31` and compared term by term in the test suite.
 
@@ -106,6 +106,8 @@ The weight factors and character set were transcribed from the standard's full t
 That second check is the one that matters. The check character is drawn from a 31-character set, so a single wrong weight or character would push the pass rate on real codes toward 1 in 31. A 2149/2149 result is not consistent with a transcription error.
 
 Note what this does *not* rest on: a generated corpus. Codes produced by the same weight table you are trying to verify will always agree with it, whether or not the table is right. Self-consistency proves nothing about transcription — only independently issued codes do.
+
+**3. The published standard itself (2026-09-30).** A third check was made against a copy of the published second edition, China Standards Press, July 2016, which includes Amendment No. 1 (approved 2016-04-15, in force 2016-04-18). Table 4 (weights), Appendix A (character values), Tables 2 and 3 as amended (all 12 authorities and 36 two-character prefixes) and the 34 province-level prefixes of GB/T 2260 match `src/tables.js`, and the worked example printed in Appendix B (`91350100M000100Y4`, check character `3`) is a test here. The copy was read on a Wikimedia Commons mirror, not the official openstd page. `test/appendix-b.test.js` keeps the standard's own numbers next to the code.
 
 55 of those codes ship in `test/fixtures/official-codes.json` with their source URL, so `npm test` re-runs a slice of that check on your machine. Only the codes were extracted; no company names were taken or stored.
 
@@ -174,6 +176,10 @@ Colour is used only when writing to a terminal, and `NO_COLOR` is honoured.
 
 Corrections to the tables are the most valuable thing you can send, especially with a citation to the standard or to an official source. If you re-run the real-code verification on a different sample and get a different result, please open an issue — that is exactly the kind of finding that should be public.
 
+## Need the company record behind a code?
+
+A passing check does not say the company exists or is active. The step-by-step calculation, every prefix and province code, and the reasons a code fails are on the [checker page](https://currawongweb.com/verify/china-usci-checker/#check-digit-calculation). If the answer matters for a real order, a supplier report pulls the company record for the code with dates and limits stated; report packs start at $26.55 and the price is shown before you order: [Check records for this code](https://currawongweb.com/supplier-report/?scenario=who-is-this-company#report-builder).
+
 ## Licence
 
 MIT. See [LICENSE](LICENSE).
@@ -182,4 +188,4 @@ MIT. See [LICENSE](LICENSE).
 
 The same algorithm runs as a browser page at [currawongweb.com/verify/china-usci-checker](https://currawongweb.com/verify/china-usci-checker/), alongside a short study of how much protection the check digit actually gives ([DOI: 10.5281/zenodo.21867383](https://doi.org/10.5281/zenodo.21867383), CC BY).
 
-Neither the page nor this package performs a registry lookup. Both stop at the same honest boundary: the code is transcribed correctly, and that is a different question from whether the company is real.
+Neither the page nor this package performs a registry lookup. Both stop at the same honest boundary: the check character is consistent, and that is a different question from whether the company is real.

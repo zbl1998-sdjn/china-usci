@@ -21,7 +21,7 @@ Usage
 
 Exit code 0 when every code parsed is 'ok', 1 otherwise.
 
-This checks transcription, not the company. A passing code does not show that
+This checks the check character, not the company. A passing code does not show that
 the company exists, is still trading, or may legally export to you.`;
 
 // Colour only when a human is looking at it. Honours NO_COLOR (no-color.org).
@@ -39,7 +39,7 @@ function render(result) {
   const lines = [];
 
   if (result.status === 'ok') {
-    lines.push(`${green('✓')} ${bold(result.code)}  ${dim('transcribed correctly')}`);
+    lines.push(`${green('✓')} ${bold(result.code)}  ${dim('check character consistent')}`);
   } else {
     lines.push(`${red('✗')} ${bold(result.code || '(empty)')}  ${red(result.status)}`);
     if (result.message) lines.push(`  ${result.message}`);

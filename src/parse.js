@@ -129,11 +129,12 @@ export function parseUsci(input) {
     code,
     segments,
     checkCharacter: actual,
-    // Deliberately "transcribed correctly" rather than "valid". "Valid" gets read
-    // as "this company is fine", which is exactly the conclusion this must not support.
+    // Says what the arithmetic checked and nothing more. Not "valid" (read as "this
+    // company is fine"), and not "transcribed correctly" either: a code can pass with
+    // a wrong character, and anyone can compute the check character for a new code.
     proves: [
-      'The 18 characters are internally consistent, so the code was transcribed correctly.',
-      'The code is formatted as GB 32100-2015 requires.'
+      'The check character agrees with the calculation from the first 17 characters.',
+      'The input has 18 characters from the permitted set. This does not confirm that it was copied correctly.'
     ],
     doesNotProve: DOES_NOT_PROVE
   };

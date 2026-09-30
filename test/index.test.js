@@ -164,12 +164,15 @@ test('every parsed result carries doesNotProve, and it is never empty', () => {
   }
 });
 
-test('a passing result never claims the code is "valid"', () => {
-  // Wording is load-bearing: "valid" gets read as "this company is fine".
+test('a passing result never claims the code is "valid" or "transcribed correctly"', () => {
+  // Wording is load-bearing: "valid" gets read as "this company is fine", and
+  // "transcribed correctly" claims more than a check character can show.
   const r = parseUsci(fixture.codes[0]);
   const joined = r.proves.join(' ').toLowerCase();
-  assert.ok(joined.includes('transcribed correctly'));
+  assert.ok(joined.includes('check character agrees'));
+  assert.ok(joined.includes('does not confirm that it was copied correctly'));
   assert.ok(!/\bvalid\b/.test(joined), 'must not say "valid"');
+  assert.ok(!joined.includes('transcribed correctly'), 'must not say "transcribed correctly"');
 });
 
 test('doesNotProve does not tie export eligibility to entity type', () => {

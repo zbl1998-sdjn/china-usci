@@ -4,6 +4,40 @@ All notable changes to this package are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] — 2026-09-30
+
+Released as tag `v0.2.1`.
+
+Wording only. `status`, `segments`, `checkCharacter` and every failure result are
+unchanged; a code that passed in 0.2.0 passes in 0.2.1.
+
+### Fixed
+
+- A passing result said "the code was transcribed correctly", in `proves`, in the
+  CLI output and in the README. That claims more than a check character shows: a
+  wrong character can still pass (measured for swaps involving the check position),
+  and anyone can compute the check character for a new code. `proves` now says what
+  the arithmetic checked, and states that it does not confirm the code was copied
+  correctly:
+  - "The check character agrees with the calculation from the first 17 characters."
+  - "The input has 18 characters from the permitted set. This does not confirm that it was copied correctly."
+  The CLI prints "check character consistent". Code that matches on the old
+  `proves` text needs the new strings.
+
+### Added
+
+- `test/appendix-b.test.js`: the worked example printed in Appendix B of
+  GB 32100-2015 (`91350100M000100Y4` gives check character `3`, sum 1640, remainder 28),
+  the two special results (remainder 0 written `0`, remainder 1 written `Y`) and a
+  check that the CLI does not claim the code was copied correctly.
+- README: a third verification against the published standard (China Standards
+  Press second edition, July 2016, with Amendment No. 1). Table 4, Appendix A,
+  Tables 2 and 3 as amended (12 authorities, 36 prefixes) and the 34 province-level
+  prefixes match `src/tables.js`. The copy was read on a Wikimedia Commons mirror,
+  not the official openstd page.
+- README: pointers to the step-by-step calculation page and, for readers who need
+  the company record behind a code, to the supplier report.
+
 ## [0.2.0] — 2026-09-22
 
 Released as tag `v0.2.0`.
